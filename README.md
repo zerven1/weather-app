@@ -9,7 +9,10 @@ npm install
 ```
 npm run serve
 ```
-
+### Compiles and hot-reloads server
+```
+npm run server
+```
 ### Compiles and minifies for production
 ```
 npm run build

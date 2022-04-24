@@ -6,30 +6,57 @@
             <!--<p id="profile-name" class="profile-name-card"></p> -->
             <form class="form-signin">
                 <span id="reauth-email" class="reauth-email"></span>
-                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div>
-                <router-link :to="{ name: 'Home'}">
-                    <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>
+                <input type="email" v-model="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <input type="password" v-model="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <p id="loginError">{{error}}</p>
+                <router-link :to="{ name: 'Login'}">
+                    <button class="btn btn-lg btn-primary btn-block btn-signin" @click="login">Sign in</button>
                 </router-link>
             </form>
-            <a href="#" class="forgot-password">
-                Forgot the password?
-            </a>
+            <router-link :to="{ name: 'Register'}">
+                Dont have account? Sign up!
+            </router-link>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
+import axios from 'axios';
+import VueRouter from 'vue-router'
 
+Vue.use(VueRouter)
 @Component
-export default class HelloWorld extends Vue {
+export default class Login extends Vue {
   @Prop() private msg!: string;
+  email!:'';
+  password!:'';
+  error!:''; 
+    data(){
+      return{
+        email:'',
+        password:'',
+        error:''
+      }
+  }
+  public login() {
+      let user = {
+          email: this.email,
+          password: this.password
+      }
+      axios.post('http://localhost:5000/login', user)
+          .then(res => {
+              if(res.status === 200){
+                  localStorage.setItem('token',res.data.token);
+                  this.$router.push('/');
+              }
+          })
+          .catch((err) => {
+            console.log(err.response);
+            this.error = err.response.data.error;
+           })
+       }
+
 }
 </script>
 <style>
@@ -171,5 +198,8 @@ body, html {
 .forgot-password:active,
 .forgot-password:focus{
     color: rgb(12, 97, 33);
+}
+#loginError{
+    color:red;
 }
 </style>

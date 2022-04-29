@@ -9,12 +9,19 @@
 
 
 <style>
+body, html {
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(rgba(255,255,255,1) 0%, rgba(210,210,210,1) 35%, rgba(98,106,107,1) 100%);
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  
 }
 
 #nav {

@@ -5,11 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    currentCity:'',
   },
   mutations: {
-  },
-  actions: {
+    setCity(state,city){
+      state.currentCity=city;
+    }
   },
   modules: {
+  },
+  getters:{
+    getCity: state => state.currentCity
   }
 })

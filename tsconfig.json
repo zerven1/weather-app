@@ -3,6 +3,8 @@
     "target": "esnext",
     "module": "esnext",
     "strict": true,
+    "allowJs":true,
+    "checkJs":true,
     "jsx": "preserve",
     "importHelpers": true,
     "moduleResolution": "node",
@@ -10,6 +12,8 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true, 
+    "resolveJsonModule": true,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
@@ -20,12 +24,6 @@
         "src/*"
       ]
     },
-    "lib": [
-      "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ]
   },
   "include": [
     "src/**/*.ts",
